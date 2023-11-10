@@ -11,15 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
-            $table->id('idUser');
-            $table->string('login');
-            $table->string('password');
-            $table->string('nom_complet');
-            $table->string('telephone',10)->nullable();
-            $table->string('email')->unique();
-            $table->rememberToken();
+        Schema::create('images', function (Blueprint $table) {
+            $table->id('idImage');
+            $table->unsignedBigInteger('idAnnonce');
+            $table->foreign('idAnnonce')->references('idAnnonce')->on('annonce');
+            $table->string('url_images');
             $table->timestamps();
+
         });
     }
 
@@ -28,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('images');
     }
 };
